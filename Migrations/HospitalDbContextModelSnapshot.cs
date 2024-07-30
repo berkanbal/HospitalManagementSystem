@@ -22,141 +22,172 @@ namespace HospitalManagementSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HospitalManagementSystem.Database.User", b =>
+            modelBuilder.Entity("HospitalManagementSystem.Database.Admin", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AdminId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminId"));
 
                     b.Property<string>("GSM_No")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("identification")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("surname")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AdminId");
 
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("Admins");
                 });
 
-            modelBuilder.Entity("HospitalManagementSystem.Database.Admin", b =>
+            modelBuilder.Entity("HospitalManagementSystem.Database.Appointment", b =>
                 {
-                    b.HasBaseType("HospitalManagementSystem.Database.User");
+                    b.Property<int>("AppointmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("startDateOfEmployment")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
+
+                    b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
 
-                    b.HasDiscriminator().HasValue("Admin");
+                    b.Property<string>("AppointmentTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoctorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoctorPoint")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PatientID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AppointmentId");
+
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("HospitalManagementSystem.Database.Doctor", b =>
                 {
-                    b.HasBaseType("HospitalManagementSystem.Database.User");
+                    b.Property<int>("DoctorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DoctorId"));
+
+                    b.Property<string>("GSM_No")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("branch")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Doctor");
+                    b.Property<string>("identification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DoctorId");
+
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("HospitalManagementSystem.Database.Patient", b =>
                 {
-                    b.HasBaseType("HospitalManagementSystem.Database.User");
+                    b.Property<int>("PatientId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("againPassword")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientId"));
+
+                    b.Property<string>("GSM_No")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Patient");
+                    b.Property<string>("identification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PatientId");
+
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("HospitalManagementSystem.Database.Secretary", b =>
                 {
-                    b.HasBaseType("HospitalManagementSystem.Database.User");
+                    b.Property<int>("SecretaryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("locationClinic")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SecretaryId"));
+
+                    b.Property<string>("GSM_No")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("Secretary");
-                });
+                    b.Property<string>("identification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("HospitalManagementSystem.Database.Admin", b =>
-                {
-                    b.HasOne("HospitalManagementSystem.Database.User", "user")
-                        .WithOne()
-                        .HasForeignKey("HospitalManagementSystem.Database.Admin", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Navigation("user");
-                });
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("HospitalManagementSystem.Database.Doctor", b =>
-                {
-                    b.HasOne("HospitalManagementSystem.Database.User", "user")
-                        .WithOne()
-                        .HasForeignKey("HospitalManagementSystem.Database.Doctor", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Navigation("user");
-                });
+                    b.HasKey("SecretaryId");
 
-            modelBuilder.Entity("HospitalManagementSystem.Database.Patient", b =>
-                {
-                    b.HasOne("HospitalManagementSystem.Database.User", "user")
-                        .WithOne()
-                        .HasForeignKey("HospitalManagementSystem.Database.Patient", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("user");
-                });
-
-            modelBuilder.Entity("HospitalManagementSystem.Database.Secretary", b =>
-                {
-                    b.HasOne("HospitalManagementSystem.Database.User", "user")
-                        .WithOne()
-                        .HasForeignKey("HospitalManagementSystem.Database.Secretary", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("user");
+                    b.ToTable("Secretaries");
                 });
 #pragma warning restore 612, 618
         }

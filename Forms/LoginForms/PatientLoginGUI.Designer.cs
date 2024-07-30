@@ -31,11 +31,11 @@
             rjBtnPatientBackMain = new CustomTools.RJButton.RJButton();
             rjBtnPatientSignUp = new CustomTools.RJButton.RJButton();
             rjBtnPatientSignIn = new CustomTools.RJButton.RJButton();
-            rjTextBoxPatientPassword = new CustomTools.RJTextBox.RJTextBox();
             label_Patient_Password = new Label();
-            rjTextBoxPatientIdentificationNo = new CustomTools.RJTextBox.RJTextBox();
             label_Patient_ID = new Label();
             lbl_PatientLoginGUI = new Label();
+            textBoxPatientLoginId = new TextBox();
+            textBoxPatientPassword = new TextBox();
             SuspendLayout();
             // 
             // rjBtnPatientBackMain
@@ -95,28 +95,7 @@
             rjBtnPatientSignIn.Text = "Sign in";
             rjBtnPatientSignIn.TextColor = Color.White;
             rjBtnPatientSignIn.UseVisualStyleBackColor = false;
-            // 
-            // rjTextBoxPatientPassword
-            // 
-            rjTextBoxPatientPassword.BackColor = SystemColors.Window;
-            rjTextBoxPatientPassword.BorderColor = Color.Salmon;
-            rjTextBoxPatientPassword.BorderFocusColor = Color.HotPink;
-            rjTextBoxPatientPassword.BorderRadius = 15;
-            rjTextBoxPatientPassword.BorderSize = 2;
-            rjTextBoxPatientPassword.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rjTextBoxPatientPassword.ForeColor = Color.FromArgb(64, 64, 64);
-            rjTextBoxPatientPassword.Location = new Point(75, 201);
-            rjTextBoxPatientPassword.Margin = new Padding(4);
-            rjTextBoxPatientPassword.Multiline = false;
-            rjTextBoxPatientPassword.Name = "rjTextBoxPatientPassword";
-            rjTextBoxPatientPassword.Padding = new Padding(10, 7, 10, 7);
-            rjTextBoxPatientPassword.PasswordChar = false;
-            rjTextBoxPatientPassword.PlaceholderColor = Color.DarkGray;
-            rjTextBoxPatientPassword.PlaceholderText = "";
-            rjTextBoxPatientPassword.Size = new Size(250, 31);
-            rjTextBoxPatientPassword.TabIndex = 12;
-            rjTextBoxPatientPassword.Texts = "";
-            rjTextBoxPatientPassword.UnderlinedStyle = false;
+            rjBtnPatientSignIn.Click += rjBtnPatientSignIn_Click;
             // 
             // label_Patient_Password
             // 
@@ -128,33 +107,11 @@
             label_Patient_Password.TabIndex = 11;
             label_Patient_Password.Text = "Password";
             // 
-            // rjTextBoxPatientIdentificationNo
-            // 
-            rjTextBoxPatientIdentificationNo.BackColor = SystemColors.Window;
-            rjTextBoxPatientIdentificationNo.BorderColor = Color.Salmon;
-            rjTextBoxPatientIdentificationNo.BorderFocusColor = Color.HotPink;
-            rjTextBoxPatientIdentificationNo.BorderRadius = 15;
-            rjTextBoxPatientIdentificationNo.BorderSize = 2;
-            rjTextBoxPatientIdentificationNo.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rjTextBoxPatientIdentificationNo.ForeColor = Color.FromArgb(64, 64, 64);
-            rjTextBoxPatientIdentificationNo.Location = new Point(75, 135);
-            rjTextBoxPatientIdentificationNo.Margin = new Padding(4);
-            rjTextBoxPatientIdentificationNo.Multiline = false;
-            rjTextBoxPatientIdentificationNo.Name = "rjTextBoxPatientIdentificationNo";
-            rjTextBoxPatientIdentificationNo.Padding = new Padding(10, 7, 10, 7);
-            rjTextBoxPatientIdentificationNo.PasswordChar = false;
-            rjTextBoxPatientIdentificationNo.PlaceholderColor = Color.DarkGray;
-            rjTextBoxPatientIdentificationNo.PlaceholderText = "";
-            rjTextBoxPatientIdentificationNo.Size = new Size(250, 31);
-            rjTextBoxPatientIdentificationNo.TabIndex = 10;
-            rjTextBoxPatientIdentificationNo.Texts = "";
-            rjTextBoxPatientIdentificationNo.UnderlinedStyle = false;
-            // 
             // label_Patient_ID
             // 
             label_Patient_ID.AutoSize = true;
             label_Patient_ID.Font = new Font("Yu Gothic UI Semibold", 11F);
-            label_Patient_ID.Location = new Point(75, 111);
+            label_Patient_ID.Location = new Point(75, 110);
             label_Patient_ID.Name = "label_Patient_ID";
             label_Patient_ID.Size = new Size(124, 20);
             label_Patient_ID.TabIndex = 9;
@@ -170,18 +127,38 @@
             lbl_PatientLoginGUI.TabIndex = 8;
             lbl_PatientLoginGUI.Text = "Ready to Login";
             // 
+            // textBoxPatientLoginId
+            // 
+            textBoxPatientLoginId.Font = new Font("Yu Gothic UI Semibold", 9.5F);
+            textBoxPatientLoginId.Location = new Point(75, 140);
+            textBoxPatientLoginId.Name = "textBoxPatientLoginId";
+            textBoxPatientLoginId.PlaceholderText = "ID";
+            textBoxPatientLoginId.Size = new Size(266, 24);
+            textBoxPatientLoginId.TabIndex = 39;
+            textBoxPatientLoginId.KeyPress += textBoxPatientLoginId_KeyPress;
+            // 
+            // textBoxPatientPassword
+            // 
+            textBoxPatientPassword.Font = new Font("Yu Gothic UI Semibold", 9.5F);
+            textBoxPatientPassword.Location = new Point(75, 208);
+            textBoxPatientPassword.Name = "textBoxPatientPassword";
+            textBoxPatientPassword.PasswordChar = '*';
+            textBoxPatientPassword.PlaceholderText = "Password";
+            textBoxPatientPassword.Size = new Size(266, 24);
+            textBoxPatientPassword.TabIndex = 40;
+            // 
             // PatientLoginGUI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(400, 350);
+            Controls.Add(textBoxPatientPassword);
+            Controls.Add(textBoxPatientLoginId);
             Controls.Add(rjBtnPatientBackMain);
             Controls.Add(rjBtnPatientSignUp);
             Controls.Add(rjBtnPatientSignIn);
-            Controls.Add(rjTextBoxPatientPassword);
             Controls.Add(label_Patient_Password);
-            Controls.Add(rjTextBoxPatientIdentificationNo);
             Controls.Add(label_Patient_ID);
             Controls.Add(lbl_PatientLoginGUI);
             FormBorderStyle = FormBorderStyle.None;
@@ -196,10 +173,10 @@
         private CustomTools.RJButton.RJButton rjBtnPatientBackMain;
         private CustomTools.RJButton.RJButton rjBtnPatientSignUp;
         private CustomTools.RJButton.RJButton rjBtnPatientSignIn;
-        private CustomTools.RJTextBox.RJTextBox rjTextBoxPatientPassword;
         private Label label_Patient_Password;
-        private CustomTools.RJTextBox.RJTextBox rjTextBoxPatientIdentificationNo;
         private Label label_Patient_ID;
         private Label lbl_PatientLoginGUI;
+        private TextBox textBoxPatientLoginId;
+        private TextBox textBoxPatientPassword;
     }
 }

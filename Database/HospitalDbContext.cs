@@ -9,64 +9,245 @@ namespace HospitalManagementSystem.Database
 {
     public class HospitalDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Secretary> Secretarys { get; set; }
+        public DbSet<Secretary> Secretaries { get; set; }
         public DbSet<Admin> Admins { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.Property(u => u.Id).ValueGeneratedOnAdd(); // Set Id as auto-incrementing
-                entity.HasKey(u => u.Id);
-                entity.Property(u => u.name).IsRequired().HasMaxLength(50);
-                entity.Property(u => u.surname).IsRequired().HasMaxLength(50);
-                entity.Property(u => u.identification).IsRequired().HasMaxLength(50);
-                entity.Property(u => u.GSM_No).IsRequired().HasMaxLength(50);
-                entity.Property(u => u.password).IsRequired().HasMaxLength(50);
-            });
+        public DbSet<Appointment> Appointments { get; set; }
 
-            modelBuilder.Entity<Doctor>(entity =>
-            {
-                entity.HasOne(d => d.user)
-                    .WithOne()
-                    .HasForeignKey<Doctor>(d => d.Id)
-                    .OnDelete(DeleteBehavior.Restrict);
-                entity.Property(d => d.branch).IsRequired().HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<Patient>(entity =>
-            {
-                entity.HasOne(p => p.user)
-                    .WithOne()
-                    .HasForeignKey<Patient>(p => p.Id)
-                    .OnDelete(DeleteBehavior.Restrict);
-                entity.Property(p => p.againPassword).IsRequired().HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<Secretary>(entity =>
-            {
-                entity.HasOne(s => s.user)
-                    .WithOne()
-                    .HasForeignKey<Secretary>(s => s.Id)
-                    .OnDelete(DeleteBehavior.Restrict);
-                entity.Property(s => s.locationClinic).IsRequired().HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<Admin>(entity =>
-            {
-                entity.HasOne(a => a.user)
-                    .WithOne()
-                    .HasForeignKey<Admin>(a => a.Id)
-                    .OnDelete(DeleteBehavior.Restrict);
-                entity.Property(a => a.startDateOfEmployment).IsRequired();
-            });
-        }
+        Helper.Helper helper;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=HospitalManagementSystem;Integrated Security=True;Trust Server Certificate=True");
 
+        }
+        public Patient PatientIDValidation(string ID)
+        {
+            return Patients.SingleOrDefault(p => p.identification == ID);
+        }
+        public Doctor DoctorIDValidation(string ID)
+        {
+            return Doctors.SingleOrDefault(p => p.identification == ID);
+        }
+        public Secretary SecretaryIDValidation(string ID)
+        {
+            return Secretaries.SingleOrDefault(p => p.identification == ID);
+        }
+        public Admin AdminIDValidation(string ID)
+        {
+            return Admins.SingleOrDefault(p => p.identification == ID);
+        }
+        public Appointment AppointmentIDValidation(int ID)
+        {
+            return Appointments.SingleOrDefault(p => p.AppointmentId == ID);
+        }
+        public void deleteSecretaryByID(int id)
+        {
+            var entityToDelete = Secretaries.FirstOrDefault(entity => entity.SecretaryId == id);
+
+            if (entityToDelete != null)
+            {
+                Secretaries.Remove(entityToDelete);
+                SaveChanges();
+                MessageBox.Show("Deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("ID not found.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void deleteDoctorByID(int id)
+        {
+            var entityToDelete = Doctors.FirstOrDefault(entity => entity.DoctorId == id);
+
+            if (entityToDelete != null)
+            {
+                Doctors.Remove(entityToDelete);
+                SaveChanges();
+                MessageBox.Show("Deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("ID not found.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void updateSecretaryByID(int id,string newName, string newSurname, string newIdentificationNo, string newGSMNo)
+        {
+            var entityToUpdate = Secretaries.FirstOrDefault(entity => entity.SecretaryId == id);
+
+            if (entityToUpdate != null)
+            {
+                entityToUpdate.name = newName;
+                entityToUpdate.surname = newSurname;
+                entityToUpdate.identification = newIdentificationNo;
+                entityToUpdate.GSM_No = newGSMNo;
+
+                SaveChanges();
+
+                MessageBox.Show("Update successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Guncelleme islemi yapilamadi.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void updatePatientByID(int id, string newName, string newSurname, string newIdentificationNo, string newGSMNo)
+        {
+            var entityToUpdate = Patients.FirstOrDefault(entity => entity.PatientId == id);
+
+            if (entityToUpdate != null)
+            {
+                entityToUpdate.name = newName;
+                entityToUpdate.surname = newSurname;
+                entityToUpdate.identification = newIdentificationNo;
+                entityToUpdate.GSM_No = newGSMNo;
+
+                SaveChanges();
+
+                MessageBox.Show("Update successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Guncelleme islemi yapilamadi.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void updateSecretaryPasswordByID(int id, string oldPassword, string newPassword, string newAgainPassword, string password)
+        {
+            var entityToUpdate = Secretaries.FirstOrDefault(entity => entity.SecretaryId == id);
+
+            Helper.PasswordHasher hasher = new Helper.PasswordHasher();
+            string hashedPassword = hasher.HashPassword(password);
+
+            if (hashedPassword != null)
+            {
+                if (hasher.VerifyPassword(oldPassword, password))
+                {
+                    if (newPassword == newAgainPassword)
+                    {
+                        entityToUpdate.password = hasher.HashPassword(newPassword);
+                        SaveChanges();
+                        MessageBox.Show("Update successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Passwords do not match.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Old password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Guncelleme islemi yapilamadi.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void updateDoctorPasswordByID(int id, string oldPassword, string newPassword, string newAgainPassword, string password)
+        {
+            var entityToUpdate = Doctors.FirstOrDefault(entity => entity.DoctorId == id);
+
+            Helper.PasswordHasher hasher = new Helper.PasswordHasher();
+            string hashedPassword = hasher.HashPassword(password);
+
+            if (hashedPassword != null)
+            {
+                if (hasher.VerifyPassword(oldPassword, password))
+                {
+                    if (newPassword == newAgainPassword)
+                    {
+                        entityToUpdate.password = hasher.HashPassword(newPassword);
+                        SaveChanges();
+                        MessageBox.Show("Update successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Passwords do not match.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Old password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Guncelleme islemi yapilamadi.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void updatePatientPasswordByID(int id, string oldPassword, string newPassword, string newAgainPassword, string password)
+        {
+            var entityToUpdate = Patients.FirstOrDefault(entity => entity.PatientId == id);
+            
+            Helper.PasswordHasher hasher = new Helper.PasswordHasher();
+            string hashedPassword = hasher.HashPassword(password);
+
+            if (hashedPassword != null)
+            {
+                if (hasher.VerifyPassword(oldPassword,password))
+                {
+                    if (string.Equals(newPassword,newAgainPassword))
+                    {
+                        entityToUpdate.password = hasher.HashPassword(newPassword);
+                        SaveChanges();
+                        MessageBox.Show("Update successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Passwords do not match.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Old password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Guncelleme islemi yapilamadi.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void updateDoctorByID(int id, string newName, string newSurname, string newIdentificationNo, string newGSMNo,string newBranch)
+        {
+            var entityToUpdate = Doctors.FirstOrDefault(entity => entity.DoctorId == id);
+
+            if (entityToUpdate != null)
+            {
+                entityToUpdate.name = newName;
+                entityToUpdate.surname = newSurname;
+                entityToUpdate.identification = newIdentificationNo;
+                entityToUpdate.GSM_No = newGSMNo;
+                entityToUpdate.branch = newBranch;
+
+                SaveChanges();
+
+                MessageBox.Show("Update successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Guncelleme islemi yapilamadi.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        public void updateDoctorByID(int id, string newName, string newSurname, string newIdentificationNo, string newGSMNo)
+        {
+            var entityToUpdate = Doctors.FirstOrDefault(entity => entity.DoctorId == id);
+
+            if (entityToUpdate != null)
+            {
+                entityToUpdate.name = newName;
+                entityToUpdate.surname = newSurname;
+                entityToUpdate.identification = newIdentificationNo;
+                entityToUpdate.GSM_No = newGSMNo;
+
+                SaveChanges();
+
+                MessageBox.Show("Update successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Guncelleme islemi yapilamadi.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

@@ -30,11 +30,11 @@
         {
             rjBtnSecretaryBackMain = new CustomTools.RJButton.RJButton();
             rjBtnSecretarySignIn = new CustomTools.RJButton.RJButton();
-            rjTextBoxSecretaryPassword = new CustomTools.RJTextBox.RJTextBox();
             label_Secretary_Password = new Label();
-            rjTextBoxSecretaryIdentificationNo = new CustomTools.RJTextBox.RJTextBox();
             label_Secretary_ID = new Label();
             lbl_SecretaryLoginGUI = new Label();
+            textBoxSecretaryLoginId = new TextBox();
+            textboxSecretaryPasswordId = new TextBox();
             SuspendLayout();
             // 
             // rjBtnSecretaryBackMain
@@ -74,66 +74,23 @@
             rjBtnSecretarySignIn.Text = "Sign in";
             rjBtnSecretarySignIn.TextColor = Color.White;
             rjBtnSecretarySignIn.UseVisualStyleBackColor = false;
-            // 
-            // rjTextBoxSecretaryPassword
-            // 
-            rjTextBoxSecretaryPassword.BackColor = SystemColors.Window;
-            rjTextBoxSecretaryPassword.BorderColor = Color.Salmon;
-            rjTextBoxSecretaryPassword.BorderFocusColor = Color.HotPink;
-            rjTextBoxSecretaryPassword.BorderRadius = 15;
-            rjTextBoxSecretaryPassword.BorderSize = 2;
-            rjTextBoxSecretaryPassword.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rjTextBoxSecretaryPassword.ForeColor = Color.FromArgb(64, 64, 64);
-            rjTextBoxSecretaryPassword.Location = new Point(75, 201);
-            rjTextBoxSecretaryPassword.Margin = new Padding(4);
-            rjTextBoxSecretaryPassword.Multiline = false;
-            rjTextBoxSecretaryPassword.Name = "rjTextBoxSecretaryPassword";
-            rjTextBoxSecretaryPassword.Padding = new Padding(10, 7, 10, 7);
-            rjTextBoxSecretaryPassword.PasswordChar = false;
-            rjTextBoxSecretaryPassword.PlaceholderColor = Color.DarkGray;
-            rjTextBoxSecretaryPassword.PlaceholderText = "";
-            rjTextBoxSecretaryPassword.Size = new Size(250, 31);
-            rjTextBoxSecretaryPassword.TabIndex = 19;
-            rjTextBoxSecretaryPassword.Texts = "";
-            rjTextBoxSecretaryPassword.UnderlinedStyle = false;
+            rjBtnSecretarySignIn.Click += rjBtnSecretarySignIn_Click;
             // 
             // label_Secretary_Password
             // 
             label_Secretary_Password.AutoSize = true;
             label_Secretary_Password.Font = new Font("Yu Gothic UI Semibold", 11F);
-            label_Secretary_Password.Location = new Point(75, 179);
+            label_Secretary_Password.Location = new Point(60, 180);
             label_Secretary_Password.Name = "label_Secretary_Password";
             label_Secretary_Password.Size = new Size(73, 20);
             label_Secretary_Password.TabIndex = 18;
             label_Secretary_Password.Text = "Password";
             // 
-            // rjTextBoxSecretaryIdentificationNo
-            // 
-            rjTextBoxSecretaryIdentificationNo.BackColor = SystemColors.Window;
-            rjTextBoxSecretaryIdentificationNo.BorderColor = Color.Salmon;
-            rjTextBoxSecretaryIdentificationNo.BorderFocusColor = Color.HotPink;
-            rjTextBoxSecretaryIdentificationNo.BorderRadius = 15;
-            rjTextBoxSecretaryIdentificationNo.BorderSize = 2;
-            rjTextBoxSecretaryIdentificationNo.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rjTextBoxSecretaryIdentificationNo.ForeColor = Color.FromArgb(64, 64, 64);
-            rjTextBoxSecretaryIdentificationNo.Location = new Point(75, 135);
-            rjTextBoxSecretaryIdentificationNo.Margin = new Padding(4);
-            rjTextBoxSecretaryIdentificationNo.Multiline = false;
-            rjTextBoxSecretaryIdentificationNo.Name = "rjTextBoxSecretaryIdentificationNo";
-            rjTextBoxSecretaryIdentificationNo.Padding = new Padding(10, 7, 10, 7);
-            rjTextBoxSecretaryIdentificationNo.PasswordChar = false;
-            rjTextBoxSecretaryIdentificationNo.PlaceholderColor = Color.DarkGray;
-            rjTextBoxSecretaryIdentificationNo.PlaceholderText = "";
-            rjTextBoxSecretaryIdentificationNo.Size = new Size(250, 31);
-            rjTextBoxSecretaryIdentificationNo.TabIndex = 17;
-            rjTextBoxSecretaryIdentificationNo.Texts = "";
-            rjTextBoxSecretaryIdentificationNo.UnderlinedStyle = false;
-            // 
             // label_Secretary_ID
             // 
             label_Secretary_ID.AutoSize = true;
             label_Secretary_ID.Font = new Font("Yu Gothic UI Semibold", 11F);
-            label_Secretary_ID.Location = new Point(75, 111);
+            label_Secretary_ID.Location = new Point(60, 110);
             label_Secretary_ID.Name = "label_Secretary_ID";
             label_Secretary_ID.Size = new Size(124, 20);
             label_Secretary_ID.TabIndex = 16;
@@ -149,17 +106,37 @@
             lbl_SecretaryLoginGUI.TabIndex = 15;
             lbl_SecretaryLoginGUI.Text = "Ready to Login";
             // 
+            // textBoxSecretaryLoginId
+            // 
+            textBoxSecretaryLoginId.Font = new Font("Yu Gothic UI Semibold", 9.5F);
+            textBoxSecretaryLoginId.Location = new Point(60, 140);
+            textBoxSecretaryLoginId.Name = "textBoxSecretaryLoginId";
+            textBoxSecretaryLoginId.PlaceholderText = "ID";
+            textBoxSecretaryLoginId.Size = new Size(266, 24);
+            textBoxSecretaryLoginId.TabIndex = 38;
+            textBoxSecretaryLoginId.KeyPress += textBoxSecretaryLoginId_KeyPress;
+            // 
+            // textboxSecretaryPasswordId
+            // 
+            textboxSecretaryPasswordId.Font = new Font("Yu Gothic UI Semibold", 9.5F);
+            textboxSecretaryPasswordId.Location = new Point(60, 212);
+            textboxSecretaryPasswordId.Name = "textboxSecretaryPasswordId";
+            textboxSecretaryPasswordId.PasswordChar = '*';
+            textboxSecretaryPasswordId.PlaceholderText = "Password";
+            textboxSecretaryPasswordId.Size = new Size(266, 24);
+            textboxSecretaryPasswordId.TabIndex = 39;
+            // 
             // SecretaryLoginGUI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(384, 311);
+            Controls.Add(textboxSecretaryPasswordId);
+            Controls.Add(textBoxSecretaryLoginId);
             Controls.Add(rjBtnSecretaryBackMain);
             Controls.Add(rjBtnSecretarySignIn);
-            Controls.Add(rjTextBoxSecretaryPassword);
             Controls.Add(label_Secretary_Password);
-            Controls.Add(rjTextBoxSecretaryIdentificationNo);
             Controls.Add(label_Secretary_ID);
             Controls.Add(lbl_SecretaryLoginGUI);
             FormBorderStyle = FormBorderStyle.None;
@@ -173,10 +150,10 @@
 
         private CustomTools.RJButton.RJButton rjBtnSecretaryBackMain;
         private CustomTools.RJButton.RJButton rjBtnSecretarySignIn;
-        private CustomTools.RJTextBox.RJTextBox rjTextBoxSecretaryPassword;
         private Label label_Secretary_Password;
-        private CustomTools.RJTextBox.RJTextBox rjTextBoxSecretaryIdentificationNo;
         private Label label_Secretary_ID;
         private Label lbl_SecretaryLoginGUI;
+        private TextBox textBoxSecretaryLoginId;
+        private TextBox textboxSecretaryPasswordId;
     }
 }

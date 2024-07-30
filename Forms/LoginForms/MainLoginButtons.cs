@@ -16,6 +16,7 @@ namespace HospitalManagementSystem.Forms
     public partial class MainLoginButtons : Form
     {
         Panel panel;
+        LoginGUI loginGUI;
 
         PatientLoginGUI patientLoginGUI;
         DoctorLoginGUI doctorLoginGUI;
@@ -27,12 +28,18 @@ namespace HospitalManagementSystem.Forms
             InitializeComponent();
             this.panel = _panel;
         }
+        public MainLoginButtons(Panel _panel, LoginGUI _loginGUI)
+        {
+            InitializeComponent();
+            this.panel = _panel;
+            this.loginGUI = _loginGUI;
+        }
 
         private void rjBtnPatientLogin_Click(object sender, EventArgs e)
         {
             //PatientLoginGUI sayfasini panel uzerinde goster. Ve panel nesnesini ctor ile GUI Formuna gonder
             Helper.Helper helper = new Helper.Helper(panel);
-            patientLoginGUI = new PatientLoginGUI(panel);
+            patientLoginGUI = new PatientLoginGUI(panel, loginGUI);
             helper.formGoster(patientLoginGUI, patientLoginGUI.Name);
         }
 
@@ -40,7 +47,7 @@ namespace HospitalManagementSystem.Forms
         {
             //DoctorLoginGUI sayfasini panel uzerinde goster.
             Helper.Helper helper = new Helper.Helper(panel);
-            doctorLoginGUI = new DoctorLoginGUI(panel);
+            doctorLoginGUI = new DoctorLoginGUI(panel, loginGUI);
             helper.formGoster(doctorLoginGUI, doctorLoginGUI.Name);
         }
 
@@ -48,7 +55,7 @@ namespace HospitalManagementSystem.Forms
         {
             //SecretaryLoginGUI sayfasini panel uzerinde goster.
             Helper.Helper helper = new Helper.Helper(panel);
-            secretaryLoginGUI = new SecretaryLoginGUI(panel);
+            secretaryLoginGUI = new SecretaryLoginGUI(panel, loginGUI);
             helper.formGoster(secretaryLoginGUI, secretaryLoginGUI.Name);
         }
 
@@ -56,7 +63,7 @@ namespace HospitalManagementSystem.Forms
         {
             //AdminLoginGUI sayfasini panel uzerinde goster.
             Helper.Helper helper = new Helper.Helper(panel);
-            adminLoginGUI = new AdminLoginGUI(panel);
+            adminLoginGUI = new AdminLoginGUI(panel, loginGUI);
             helper.formGoster(adminLoginGUI, adminLoginGUI.Name);
         }
     }

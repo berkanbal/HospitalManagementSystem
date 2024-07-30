@@ -30,11 +30,11 @@
         {
             rjBtnDoctorBackMain = new CustomTools.RJButton.RJButton();
             rjBtnDoctorSignIn = new CustomTools.RJButton.RJButton();
-            rjTextBoxDoctorPassword = new CustomTools.RJTextBox.RJTextBox();
             labelDoctorPassword = new Label();
-            rjTextBoxDoctorIdentificationNo = new CustomTools.RJTextBox.RJTextBox();
             labelDoctorID = new Label();
             lbl_DoctorLoginGUI = new Label();
+            textBoxDoctorLogiId = new TextBox();
+            textboxDoctorPassword = new TextBox();
             SuspendLayout();
             // 
             // rjBtnDoctorBackMain
@@ -48,9 +48,10 @@
             rjBtnDoctorBackMain.FlatStyle = FlatStyle.Flat;
             rjBtnDoctorBackMain.ForeColor = Color.White;
             rjBtnDoctorBackMain.Image = Properties.Resources.LeftArrowIcon;
-            rjBtnDoctorBackMain.Location = new Point(3, 3);
+            rjBtnDoctorBackMain.Location = new Point(3, 4);
+            rjBtnDoctorBackMain.Margin = new Padding(3, 4, 3, 4);
             rjBtnDoctorBackMain.Name = "rjBtnDoctorBackMain";
-            rjBtnDoctorBackMain.Size = new Size(40, 40);
+            rjBtnDoctorBackMain.Size = new Size(46, 53);
             rjBtnDoctorBackMain.TabIndex = 21;
             rjBtnDoctorBackMain.TextColor = Color.White;
             rjBtnDoctorBackMain.UseVisualStyleBackColor = false;
@@ -67,75 +68,33 @@
             rjBtnDoctorSignIn.FlatStyle = FlatStyle.Flat;
             rjBtnDoctorSignIn.Font = new Font("Yu Gothic UI Semibold", 10F);
             rjBtnDoctorSignIn.ForeColor = Color.White;
-            rjBtnDoctorSignIn.Location = new Point(130, 253);
+            rjBtnDoctorSignIn.Location = new Point(149, 337);
+            rjBtnDoctorSignIn.Margin = new Padding(3, 4, 3, 4);
             rjBtnDoctorSignIn.Name = "rjBtnDoctorSignIn";
-            rjBtnDoctorSignIn.Size = new Size(140, 31);
+            rjBtnDoctorSignIn.Size = new Size(160, 41);
             rjBtnDoctorSignIn.TabIndex = 20;
             rjBtnDoctorSignIn.Text = "Sign in";
             rjBtnDoctorSignIn.TextColor = Color.White;
             rjBtnDoctorSignIn.UseVisualStyleBackColor = false;
-            // 
-            // rjTextBoxDoctorPassword
-            // 
-            rjTextBoxDoctorPassword.BackColor = SystemColors.Window;
-            rjTextBoxDoctorPassword.BorderColor = Color.Salmon;
-            rjTextBoxDoctorPassword.BorderFocusColor = Color.HotPink;
-            rjTextBoxDoctorPassword.BorderRadius = 15;
-            rjTextBoxDoctorPassword.BorderSize = 2;
-            rjTextBoxDoctorPassword.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rjTextBoxDoctorPassword.ForeColor = Color.FromArgb(64, 64, 64);
-            rjTextBoxDoctorPassword.Location = new Point(75, 201);
-            rjTextBoxDoctorPassword.Margin = new Padding(4);
-            rjTextBoxDoctorPassword.Multiline = false;
-            rjTextBoxDoctorPassword.Name = "rjTextBoxDoctorPassword";
-            rjTextBoxDoctorPassword.Padding = new Padding(10, 7, 10, 7);
-            rjTextBoxDoctorPassword.PasswordChar = false;
-            rjTextBoxDoctorPassword.PlaceholderColor = Color.DarkGray;
-            rjTextBoxDoctorPassword.PlaceholderText = "";
-            rjTextBoxDoctorPassword.Size = new Size(250, 31);
-            rjTextBoxDoctorPassword.TabIndex = 19;
-            rjTextBoxDoctorPassword.Texts = "";
-            rjTextBoxDoctorPassword.UnderlinedStyle = false;
+            rjBtnDoctorSignIn.Click += rjBtnDoctorSignIn_Click;
             // 
             // labelDoctorPassword
             // 
             labelDoctorPassword.AutoSize = true;
             labelDoctorPassword.Font = new Font("Yu Gothic UI Semibold", 11F);
-            labelDoctorPassword.Location = new Point(75, 179);
+            labelDoctorPassword.Location = new Point(86, 239);
             labelDoctorPassword.Name = "labelDoctorPassword";
-            labelDoctorPassword.Size = new Size(73, 20);
+            labelDoctorPassword.Size = new Size(92, 25);
             labelDoctorPassword.TabIndex = 18;
             labelDoctorPassword.Text = "Password";
-            // 
-            // rjTextBoxDoctorIdentificationNo
-            // 
-            rjTextBoxDoctorIdentificationNo.BackColor = SystemColors.Window;
-            rjTextBoxDoctorIdentificationNo.BorderColor = Color.Salmon;
-            rjTextBoxDoctorIdentificationNo.BorderFocusColor = Color.HotPink;
-            rjTextBoxDoctorIdentificationNo.BorderRadius = 15;
-            rjTextBoxDoctorIdentificationNo.BorderSize = 2;
-            rjTextBoxDoctorIdentificationNo.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            rjTextBoxDoctorIdentificationNo.ForeColor = Color.FromArgb(64, 64, 64);
-            rjTextBoxDoctorIdentificationNo.Location = new Point(75, 135);
-            rjTextBoxDoctorIdentificationNo.Margin = new Padding(4);
-            rjTextBoxDoctorIdentificationNo.Multiline = false;
-            rjTextBoxDoctorIdentificationNo.Name = "rjTextBoxDoctorIdentificationNo";
-            rjTextBoxDoctorIdentificationNo.Padding = new Padding(10, 7, 10, 7);
-            rjTextBoxDoctorIdentificationNo.PasswordChar = false;
-            rjTextBoxDoctorIdentificationNo.PlaceholderColor = Color.DarkGray;
-            rjTextBoxDoctorIdentificationNo.PlaceholderText = "";
-            rjTextBoxDoctorIdentificationNo.Size = new Size(250, 31);
-            rjTextBoxDoctorIdentificationNo.TabIndex = 17;
-            rjTextBoxDoctorIdentificationNo.Texts = "";
-            rjTextBoxDoctorIdentificationNo.UnderlinedStyle = false;
             // 
             // labelDoctorID
             // 
             labelDoctorID.AutoSize = true;
             labelDoctorID.Font = new Font("Yu Gothic UI Semibold", 11F);
-            labelDoctorID.Location = new Point(75, 111);
+            labelDoctorID.Location = new Point(86, 148);
             labelDoctorID.Name = "labelDoctorID";
-            labelDoctorID.Size = new Size(124, 20);
+            labelDoctorID.Size = new Size(157, 25);
             labelDoctorID.TabIndex = 16;
             labelDoctorID.Text = "Identification No";
             // 
@@ -143,28 +102,52 @@
             // 
             lbl_DoctorLoginGUI.AutoSize = true;
             lbl_DoctorLoginGUI.Font = new Font("Yu Gothic UI Semibold", 13F);
-            lbl_DoctorLoginGUI.Location = new Point(132, 62);
+            lbl_DoctorLoginGUI.Location = new Point(151, 83);
             lbl_DoctorLoginGUI.Name = "lbl_DoctorLoginGUI";
-            lbl_DoctorLoginGUI.Size = new Size(137, 25);
+            lbl_DoctorLoginGUI.Size = new Size(163, 30);
             lbl_DoctorLoginGUI.TabIndex = 15;
             lbl_DoctorLoginGUI.Text = "Ready to Login";
             // 
+            // textBoxDoctorLogiId
+            // 
+            textBoxDoctorLogiId.Font = new Font("Yu Gothic UI Semibold", 9.5F);
+            textBoxDoctorLogiId.Location = new Point(86, 187);
+            textBoxDoctorLogiId.Margin = new Padding(3, 4, 3, 4);
+            textBoxDoctorLogiId.Name = "textBoxDoctorLogiId";
+            textBoxDoctorLogiId.PlaceholderText = "ID";
+            textBoxDoctorLogiId.Size = new Size(303, 29);
+            textBoxDoctorLogiId.TabIndex = 40;
+            textBoxDoctorLogiId.KeyPress += textBoxDoctorLogiId_KeyPress;
+            // 
+            // textboxDoctorPassword
+            // 
+            textboxDoctorPassword.Font = new Font("Yu Gothic UI Semibold", 9.5F);
+            textboxDoctorPassword.Location = new Point(86, 277);
+            textboxDoctorPassword.Margin = new Padding(3, 4, 3, 4);
+            textboxDoctorPassword.Name = "textboxDoctorPassword";
+            textboxDoctorPassword.PasswordChar = '*';
+            textboxDoctorPassword.PlaceholderText = "Password";
+            textboxDoctorPassword.Size = new Size(303, 29);
+            textboxDoctorPassword.TabIndex = 41;
+            // 
             // DoctorLoginGUI
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(400, 350);
+            ClientSize = new Size(457, 467);
+            Controls.Add(textboxDoctorPassword);
+            Controls.Add(textBoxDoctorLogiId);
             Controls.Add(rjBtnDoctorBackMain);
             Controls.Add(rjBtnDoctorSignIn);
-            Controls.Add(rjTextBoxDoctorPassword);
             Controls.Add(labelDoctorPassword);
-            Controls.Add(rjTextBoxDoctorIdentificationNo);
             Controls.Add(labelDoctorID);
             Controls.Add(lbl_DoctorLoginGUI);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "DoctorLoginGUI";
             Text = "DoctorLogin";
+            Load += DoctorLoginGUI_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -173,10 +156,10 @@
 
         private CustomTools.RJButton.RJButton rjBtnDoctorBackMain;
         private CustomTools.RJButton.RJButton rjBtnDoctorSignIn;
-        private CustomTools.RJTextBox.RJTextBox rjTextBoxDoctorPassword;
         private Label labelDoctorPassword;
-        private CustomTools.RJTextBox.RJTextBox rjTextBoxDoctorIdentificationNo;
         private Label labelDoctorID;
         private Label lbl_DoctorLoginGUI;
+        private TextBox textBoxDoctorLogiId;
+        private TextBox textboxDoctorPassword;
     }
 }

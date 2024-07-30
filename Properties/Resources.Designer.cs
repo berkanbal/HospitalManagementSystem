@@ -63,6 +63,16 @@ namespace HospitalManagementSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap HospitalSystemLoginGUILogo {
+            get {
+                object obj = ResourceManager.GetObject("HospitalSystemLoginGUILogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LeftArrowIcon {
             get {
                 object obj = ResourceManager.GetObject("LeftArrowIcon", resourceCulture);
